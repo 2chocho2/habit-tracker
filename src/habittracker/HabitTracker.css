@@ -1,0 +1,302 @@
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ------------------------------ 공통 ------------------------------ */
+
+/* 해빗트래커 배경 */
+.habit_tracker_container {
+    height: 100%;
+    background-color: #FFF8DD;
+    padding: 200px 200px 300px 300px;
+    font-family: 'NanumSquareNeo-Variable';
+} 
+.habit_tracker_container::after {
+        display: block;
+        content: "";
+        clear: both;
+}
+
+/* 타이틀 */
+.habit_tracker_title {
+    text-align: center;
+    font-size: 20px;
+    color: #E44A4A;
+    line-height: 50px;
+
+    float: none;
+    border: 3px solid #E44A4A;
+    background-color: #FFF8DD;
+    width: 400px;
+    height: 50px;
+    border-radius: 60px;
+    padding-right: 20px;
+    box-shadow: 2px 2px 2px 2px rgb(216, 203, 203);
+}
+/* 타이틀 원형 */
+.habit_tracker_title_circle {
+    text-align: center;
+    line-height: 50px;
+    color: #FFF8DD;
+
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #E44A4A;
+    border-radius: 50px;
+    background-color: #E44A4A;
+    margin-top: 17px;
+}
+.habit_tracker_title_circle_icon {
+    float: left;
+    width: 45px;
+    height: 26px;
+    color: #FFF8DD;
+    margin-top: 14px;
+    margin-left: 3px;
+}
+
+/* ------------------------------ 공통 end ------------------------------ */
+.habit_tracker_month, .habit_tracker_before_month, .habit_tracker_next_month {
+    float: left;
+    margin-top: 100px;
+}
+
+/* 달력 */
+.habit_tracker_month {
+    width: 1260px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 60px;
+    color: #E44A4A;
+}
+.habit_tracker_before_month, .habit_tracker_next_month {
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+
+
+.my_habit_chart, .habit_list_container {
+    float: left;
+}
+
+/* ------------------------------ 차트 ------------------------------ */
+
+/* 차트 제목 */
+.my_habit_chart_title {
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    font-size: 25px;
+    color: #E44A4A; 
+    float: none;
+    background-color: #FFF8DD;
+}
+
+.my_habit_chart {
+    position: relative;
+    display: inline-block;
+    width: 900px;
+    height: 600px;
+    border: 3px solid #E44A4A;
+    border-radius: 3px;
+    margin-top: 50px;
+    margin-right: 50px;
+    background-color: #E44A4A;
+}
+/* ------------------------------ 차트 end ------------------------------ */
+
+
+/* ------------------------------ 리스트 ------------------------------ */
+
+/* 리스트 전체 div */
+.habit_list_container {
+    margin-top: 50px;
+    width: 400px;
+    height: 600px;
+    overflow-y: auto; 
+    overflow-x:hidden; 
+    border: 3px solid #E44A4A;
+    border-radius: 4px;
+    background-color: #FFCACA;
+}
+/* 리스트 스크롤 */
+.habit_list_container::-webkit-scrollbar {
+    display: none;
+}
+
+/* 리스트 타이틀 */
+.habit_list_title {
+    background-color: #E44A4A;
+    color: #FFFFFF;
+    height: 60px;
+    font-size: 25px;
+    text-align: center;
+    line-height: 60px;
+    width: 400px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    margin-bottom: 10px;
+}
+
+/* 리스트 목록 */
+
+.habit_list_remove, .habit_list_text {
+    float: left;
+}
+.list_box, .habit_list_progress_box {
+    float: left;
+}
+.list_box {
+    width: 310px;
+    height: 50px;
+    line-height: 50px;
+    border: 2px solid #E44A4A;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
+    align-items: center;
+}
+/* 리스트 텍스트 */
+.habit_list_text {
+    height: 50px;
+    line-height: 50px;
+    align-items: center;
+    text-align: center;
+    text-decoration-line: none;
+    color: #E44A4A;
+    font-size: 20px;
+}
+/* 진행률 박스 */
+.habit_list_progress_box {
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #FFFFFF;
+
+    color: #E44A4A;
+    border: 2px solid #E44A4A;
+    border-radius: 10px;
+}
+
+.habit_list_progress_box input {
+    width: 20px;
+    height: 20px;
+    margin: 15px;
+    cursor: pointer;
+}
+
+/* 리스트 삭제 */
+.habit_list_remove {
+    margin: 10px;
+    color: #FFCACA;
+    cursor: pointer;
+    height: 30px;
+    width: 20px;
+}
+.TodoListItem .remove:hover {
+    color: #E44A4A;
+}
+
+
+/* 체크박스 */
+/* .habit_list_check_box {
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 50px;
+    width: 50px;
+    color: #E44A4A;
+}
+.habit_list_check_box img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+}
+.habit_list_check_box svg {
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 10px;
+
+} */
+
+/* 리스트 삭제 */
+/* .habit_list_remove {
+    margin-left: 25px;
+    color: #E44A4A;
+    cursor: pointer;
+    height: 50px;
+    width: 25px;
+} */
+
+
+/* ------------------------------ 리스트 목록 end ------------------------------ */
+
+
+
+
+/* ------------------------------ 입력 ------------------------------ */
+
+.habit_list_insert_text, .habit_list_insert button {
+    float: left;
+}
+.habit_list_insert {
+    width: 400px;
+    height: 75px;
+    display: flex;
+    background-color: #FFCACA;
+    position: sticky;
+    bottom: 0;
+    border-top: 3px solid #E44A4A;
+    margin-top: 10px;
+}
+.habit_list_insert_text {
+    margin: 10px;
+    width: 307px;
+    height: 50px;
+    background-color: #FFFFFF;
+    border: 2px solid #E44A4A;
+    border-radius: 10px;
+    color: #E44A4A;
+    text-align: center;
+    font-size: 20px;
+    line-height: 50px;
+    outline: none;
+}
+.habit_list_insert ::placeholder {
+    color: #FFCACA;
+}
+.habit_list_insert button {
+    margin-top: 10px;
+    width: 55px;
+    height: 55px;
+    background-color: #E44A4A;
+    border: 2px solid #E44A4A;
+    border-radius: 10px;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 30px;
+    line-height: 56px;
+    cursor: pointer;
+    transition: 0.1s background ease-in;
+}
+
+.habit_list_insert button:hover {
+    background-color: #FFFFFF;
+    color: #E44A4A;
+}
+
+/* ------------------------------ 입력 end ------------------------------ */
+
+
+
+
+
