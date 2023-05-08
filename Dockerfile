@@ -3,8 +3,6 @@ RUN     mkdir /my-app
 WORKDIR /my-app
 ARG     GIT_REPOSITORY_ADDRESS
 RUN     apk update && apk add git && git clone $GIT_REPOSITORY_ADDRESS
-RUN     ls
-CMD     ["ls /my-app/habit-tracker"]
 
 FROM    node  AS builder
 RUN     mkdir /my-app
