@@ -9,7 +9,7 @@ RUN     ls /my-app/habit-tracker
 FROM    node  AS builder
 RUN     mkdir /my-app
 WORKDIR /my-app
-COPY    --from=init /my-app/habit-tracker .
+COPY    --from=init /my-app/habit-tracker ./
 ARG     REST_API_SERVER_IP
 ARG     REST_API_SERVER_PORT
 RUN     echo REACT_APP_IP=$REST_API_SERVER_IP > .env
