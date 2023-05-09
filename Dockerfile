@@ -4,8 +4,8 @@ WORKDIR /my-app
 ARG     GIT_REPOSITORY_ADDRESS
 ARG     REST_API_SERVER_IP
 ARG     REST_API_SERVER_PORT
-RUN     apk update && apk add git && git clone $GIT_REPOSITORY_ADDRESS
-RUN     mv ./habit-tracker/* ./
+RUN     git clone $GIT_REPOSITORY_ADDRESS
+RUN     mv habit-tracker/* ./
 RUN     echo REACT_APP_IP=$REST_API_SERVER_IP > .env
 RUN     echo REACT_APP_PORT=$REST_API_SERVER_PORT >> .env
 RUN     npm install
