@@ -13,6 +13,7 @@ ARG     REST_API_SERVER_PORT
 RUN     echo REACT_APP_IP=$REST_API_SERVER_IP > .env
 RUN     echo REACT_APP_PORT=$REST_API_SERVER_PORT >> .env
 RUN     apt-get update && apt-get install -y curl
+RUN     ls package.json
 RUN     npm install
 RUN     npm run build
 
