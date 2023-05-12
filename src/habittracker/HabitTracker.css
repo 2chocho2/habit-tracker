@@ -1,18 +1,24 @@
 @font-face {
-    font-family: 'NanumSquareNeo-Variable';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
-/* ------------------------------ 공통 ------------------------------ */
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/* ------------------------------ 하빗트래커, 디테일 페이지 공통 배경 / 타이틀 ------------------------------ */
 
 /* 해빗트래커 배경 */
 .habit_tracker_container {
     height: 100%;
     background-color: #FFF8DD;
-    padding: 200px 200px 300px 300px;
-    font-family: 'NanumSquareNeo-Variable';
+    padding: 70px 200px 300px 270px;
+    font-family: 'Dovemayo_gothic';
 } 
 .habit_tracker_container::after {
         display: block;
@@ -26,7 +32,7 @@
     font-size: 20px;
     color: #E44A4A;
     line-height: 50px;
-
+    font-family: 'yg-jalnan';
     float: none;
     border: 3px solid #E44A4A;
     background-color: #FFF8DD;
@@ -60,11 +66,14 @@
 }
 
 /* ------------------------------ 공통 end ------------------------------ */
+
+/* ------------------------------  달력 ------------------------------ */
+
 .habit_tracker_month, .habit_tracker_before_month, .habit_tracker_next_month {
     float: left;
-    margin-top: 100px;
+    margin-top: 30px;
+    font-family: 'yg-jalnan';
 }
-
 /* 달력 */
 .habit_tracker_month {
     width: 1260px;
@@ -72,6 +81,7 @@
     line-height: 50px;
     text-align: center;
     font-size: 60px;
+    font-weight: bold;
     color: #E44A4A;
 }
 .habit_tracker_before_month, .habit_tracker_next_month {
@@ -79,8 +89,6 @@
     width: 50px;
     cursor: pointer;
 }
-
-
 .my_habit_chart, .habit_list_container {
     float: left;
 }
@@ -92,7 +100,7 @@
     height: 60px;
     text-align: center;
     line-height: 60px;
-    font-size: 25px;
+    font-size: 30px;
     color: #E44A4A; 
     float: none;
     background-color: #FFF8DD;
@@ -109,8 +117,6 @@
     margin-right: 50px;
     background-color: #E44A4A;
 }
-/* ------------------------------ 차트 end ------------------------------ */
-
 
 /* ------------------------------ 리스트 ------------------------------ */
 
@@ -129,174 +135,152 @@
 .habit_list_container::-webkit-scrollbar {
     display: none;
 }
-
-/* 리스트 타이틀 */
+.list_title_text, .edit_cancel {
+    float: left;
+}
+/* 리스트 제목 박스 */
 .habit_list_title {
     background-color: #E44A4A;
     color: #FFFFFF;
     height: 60px;
-    font-size: 25px;
-    text-align: center;
+    font-size: 30px;
     line-height: 60px;
-    width: 400px;
+    width: 100%;
     position: sticky;
     top: 0;
     z-index: 50;
     margin-bottom: 10px;
+    text-align: center;
+}
+/* 제목 */
+.list_title_text {
+    width: 70%;
+    margin-left: 15%;
 }
 
-/* 리스트 목록 */
-
-.habit_list_remove, .habit_list_text {
-    float: left;
-}
-.list_box, .habit_list_progress_box {
-    float: left;
-}
+/* 리스트 내용 전체 */
 .list_box {
-    width: 310px;
+    width: 93.5%;
     height: 50px;
     line-height: 50px;
-    border: 2px solid #E44A4A;
+    border: 3px solid #E44A4A;
     border-radius: 10px;
-    margin-left: 10px;
+    margin-left: 2.5%;
     margin-bottom: 10px;
     background-color: #FFFFFF;
-    align-items: center;
 }
-/* 리스트 텍스트 */
+
+.habit_list_remove, .habit_list_text, .editBtn {
+    float: left;
+}
+
+/* 텍스트 */
 .habit_list_text {
+    width: 76%;
     height: 50px;
     line-height: 50px;
-    align-items: center;
-    text-align: center;
     text-decoration-line: none;
     color: #E44A4A;
-    font-size: 20px;
-}
-/* 진행률 박스 */
-.habit_list_progress_box {
-    margin-left: 10px;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    background-color: #FFFFFF;
-
-    color: #E44A4A;
-    border: 2px solid #E44A4A;
-    border-radius: 10px;
+    font-size: 25px;
 }
 
-.habit_list_progress_box input {
-    width: 20px;
-    height: 20px;
-    margin: 15px;
-    cursor: pointer;
-}
-
-/* 리스트 삭제 */
+/* 삭제 버튼 */
 .habit_list_remove {
-    margin: 10px;
+    margin: 2.5%;
     color: #FFCACA;
     cursor: pointer;
     height: 30px;
-    width: 20px;
+    width: 6%;
 }
-.TodoListItem .remove:hover {
-    color: #E44A4A;
-}
-
-
-/* 체크박스 */
-/* .habit_list_check_box {
-    margin-top: 5px;
-    margin-left: 5px;
-    width: 50px;
-    width: 50px;
-    color: #E44A4A;
-}
-.habit_list_check_box img {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-
-}
-.habit_list_check_box svg {
-    cursor: pointer;
-    font-size: 20px;
+/* 바로가기 아이콘 */
+.icon {
     margin-left: 10px;
+ } 
 
-} */
+ /* ------------------------------ 입력 ------------------------------ */
 
-/* 리스트 삭제 */
-/* .habit_list_remove {
-    margin-left: 25px;
-    color: #E44A4A;
-    cursor: pointer;
-    height: 50px;
-    width: 25px;
-} */
-
-
-/* ------------------------------ 리스트 목록 end ------------------------------ */
-
-
-
-
-/* ------------------------------ 입력 ------------------------------ */
-
-.habit_list_insert_text, .habit_list_insert button {
+.insert_text, .insert_btn {
     float: left;
 }
+
+/* 입력 박스 전체 */
 .habit_list_insert {
-    width: 400px;
+    width: 100%;
     height: 75px;
     display: flex;
-    background-color: #FFCACA;
     position: sticky;
     bottom: 0;
     border-top: 3px solid #E44A4A;
     margin-top: 10px;
+    background-color: #FFCACA;
+    
 }
-.habit_list_insert_text {
-    margin: 10px;
-    width: 307px;
+.habit_list_insert form {
+    width: 100%;
+    height: 75px;
+    display: flex;
+    position: sticky;
+    bottom: 0;
+}
+
+/* 입력 input */
+.insert_text {
+    width: 76%;
     height: 50px;
+    margin: 10px;
     background-color: #FFFFFF;
-    border: 2px solid #E44A4A;
+    border: 3px solid #E44A4A;
     border-radius: 10px;
-    color: #E44A4A;
-    text-align: center;
-    font-size: 20px;
-    line-height: 50px;
+    
+}
+.insert_text input {
+    margin: 1%;
+    width: 97%;
+    height: 85%;
+    border: 0;
     outline: none;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    text-align: center;
+    font-size: 25px;
+    color: #E44A4A;
+    font-family: 'Dovemayo_gothic';
 }
 .habit_list_insert ::placeholder {
     color: #FFCACA;
+    font-family: 'Dovemayo_gothic';
 }
-.habit_list_insert button {
+
+/* 입력 버튼 */
+.insert_btn {
     margin-top: 10px;
-    width: 55px;
-    height: 55px;
-    background-color: #E44A4A;
-    border: 2px solid #E44A4A;
+    width: 13.5%;
+    height: 50px;
+    border: 3px solid #E44A4A;
     border-radius: 10px;
+    background-color: #E44A4A;
+
+}
+.insert_btn button {
+    /* margin-top: 10px; */
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
     color: #FFFFFF;
     text-align: center;
-    font-size: 30px;
-    line-height: 56px;
+    line-height: 100%;
+    border: #FFFFFF;
+
+    border-radius: 8px;
+    background-color: #E44A4A;
     cursor: pointer;
+    outline: none;
     transition: 0.1s background ease-in;
 }
 
-.habit_list_insert button:hover {
+.insert_btn button:hover {
     background-color: #FFFFFF;
     color: #E44A4A;
 }
-
-/* ------------------------------ 입력 end ------------------------------ */
-
-
-
 
 

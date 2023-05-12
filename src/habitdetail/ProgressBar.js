@@ -1,29 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import styled from "styled-components";
-import cherry1 from "./cherry1.png"
-import cherry22 from "./cherry22.png"
-import cherry3 from "./cherry3.png"
+import cherry1 from "../img/cherry1.png"
+import cherry22 from "../img/cherry22.png"
+import cherry3 from "../img/cherry3.png"
+import axios from "axios";
 
+const ProgressBar = ({ percent }) => {
 
-const ProgressBar = () => {
+  const [progressPercent, setProgressPercent] = useState(0);
+  const { habitIdx } = useParams();
 
-    const [count , setCount] = useState(0);
+  useEffect(() => {
+    axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/detail/${habitIdx}`)
+      .then(response => {
+        console.log(response);
+        setProgressPercent(response.data.percent);
+      })
+      .catch(error => console.log(error));
+  }, [percent]);
 
-    function addCount() {
-        if (count === 5) {
-            setCount(0);
-        } else {
-            setCount(count + 1);
-        }
-    }
+  const progressImg = () => {
+    if (progressPercent < 30) {
+      return <Cherry1 />
+    } else if (progressPercent >= 30 && progressPercent < 60) {
+      return <Cherry2 />
+    } else {
+      return <Cherry3 />
+    };
+  }
 
   return (
-        <Container className="gage_bar" onClick={() => {addCount()}}>
-            <Progress className="gage_percent" width={(count/5)*100 + "%"}/>
-            <Cherry1/>
-            {/* <Cherry2/> */}
-            {/* <Cherry3/> */}
-        </Container>
+    <Container>
+      <Progress width={(percent / 100) * 100 + "%"} />
+      {progressImg()}
+      <Percent>{progressPercent}%</Percent>
+    </Container>
   );
 }
 
@@ -31,14 +43,14 @@ export default ProgressBar;
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
+  // align-items: center;
   width: 900px;
   height: 50px;
-  border: 4px solid #E44A4A;
+  border: 3px solid #E44A4A;
   border-radius: 30px;
-  margin-top: 40px;
-  margin-left: 220px;
   background-color: #FFF8DD;
+  margin-left: 235px;
+  margin-top: 40px;
 `;
 const Progress = styled.div`
   background-color: #fd9a9a;
@@ -46,6 +58,14 @@ const Progress = styled.div`
   height: 100%;
   transition: width 1s;
   border-radius: 30px;
+`;
+const Percent = styled.div`
+  // width: 20px;
+  height: 100%;
+  font-size: 20px;
+  margin-left: -110px;
+  margin-top: 15px;
+  color: #FFF8DD;
 `;
 
 //프로그레스 바에 원 달아서 프로그레스 바가 차오를 때 같이 차오름
@@ -59,11 +79,13 @@ const Cherry2 = styled.div`
   width: 54px;
   height: 73px;
   background-image: url(${cherry22});
-  margin-left: -58px;
+  margin-left: -60px;
+  margin-top: -10px;
 `
 const Cherry3 = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background-image: url(${cherry3});
-  margin-left: -85px;
+  margin-left: -80px;
+  margin-top: -10px;
 `

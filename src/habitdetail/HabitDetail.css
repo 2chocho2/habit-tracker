@@ -1,101 +1,78 @@
 @font-face {
-    font-family: 'NanumSquareNeo-Variable';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
-
-/* 해빗트래커 배경 */
-.habit_tracker_container {
-    height: 100%;
-    background-color: #FFF8DD;
-    padding: 100px 200px 300px 250px;
-    font-family: 'NanumSquareNeo-Variable';
-} 
-.habit_tracker_container::after {
-        display: block;
-        content: "";
-        clear: both;
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
-/* 타이틀 */
-.habit_tracker_title {
-    text-align: center;
-    font-size: 20px;
-    color: #E44A4A;
-    line-height: 50px;
-    font-family: 'NanumSquareNeo-Variable';
-
-    float: none;
-    border: 3px solid #E44A4A;
-    background-color: #FFF8DD;
-    width: 400px;
-    height: 50px;
-    border-radius: 60px;
-    padding-right: 20px;
-    box-shadow: 2px 2px 2px 2px rgb(216, 203, 203);
-}
-/* 타이틀 원형 */
-.habit_tracker_title_circle {
-    text-align: center;
-    line-height: 50px;
-    color: #FFF8DD;
-
-    float: left;
-    width: 50px;
-    height: 50px;
-    border: 2px solid #E44A4A;
-    border-radius: 50px;
-    background-color: #E44A4A;
-    margin-top: 17px;
-}
-
-/* ------------------------------ 공통 end ------------------------------ */
-
+/* ------------------------------ 본문 전체 box ------------------------------ */
 
 /* 본문 */
 .habit_detail_container {
-    width: 1400px;
+    width: 1360px;
     height: 650px;
     border: 3px solid #E44A4A;
+    border-radius: 30px;
     margin-top: 50px;
     background-color: #FFCACA;
 }
 
-/* 본문 제목 */
+/* 본문 제목 전체 칸 */
 .habit_detail_title {
-    text-align: center;
-    line-height: 60px;
-    font-size: 30px;
-    color: #FFF8DD; 
+    width: 100%;
     height: 60px;
     float: none;
     background-color: #E44A4A;
     border-bottom: 3px solid #E44A4A;
+    border-radius: 20px 20px 0px 0px;
 }
 
+/* 월, 달성일 */
+.todayMonth, .success_date {
+    float: left;
+    line-height: 60px;
+    font-size: 30px;
+    color: #FFF8DD; 
+}
+.todayMonth {
+    width: 55%;
+    text-align: center;
+    margin-left: 25%;
+}
+.success_date {
+    width: 20%;
+    text-align: center;
+}
 
-/* ------------------------------ 내용 ------------------------------ */
+/* ------------------------------ 내용 전체 box ------------------------------ */
 
+/* 내용 전체 칸 */
 .habit_detail_content_container {
     position: absolute;
     width: 1200px;
     height: 400px;
-    border: 4px solid #E44A4A;
+    border: 3px solid #E44A4A;
     border-radius: 60px;
     margin-top: 40px;
-    margin-left: 100px;
+    margin-left: 75px;
 }
+
+/* 내용 제목 칸 */
 .habit_detail_content_title {
     float: left;
     display: flex;
     align-items: center;
-    height: 300px;
+    height: 290px;
     width: 300px;
-    border-radius: 50px 0px 0px 0px;
+    border-radius: 50px 0px 0px 00px;
     background-color: #E44A4A;
 }
-
+/* 제목 div */
 .habit_content_title {
     width: 100%;
     color: #FFF8DD;
@@ -104,17 +81,21 @@
     text-align: center;
 }
 
+/* 제목, 내용 나누는 장식 선 */
 .habit_detail_content_title_line {
     float: left;
-    border-left: 4px solid #E44A4A;
+    border-left: 3px solid #E44A4A;
     height: 400px;
 }
 
-.habit_detail_content_circle {
+/* ------------------------------ 날짜 원형 이미지 ------------------------------ */
+
+
+.content_circle {
     float: left;
     width: 60px;
     height: 60px;
-    border: 4px solid #E44A4A;
+    border: 3px solid #E44A4A;
     border-radius: 50px;
     background-color: #FFF8DD;
     margin-left: 12px;
@@ -123,61 +104,174 @@
     line-height: 60px; 
 }
 
-.habit_detail_content_circle button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    background-color: #FFF8DD;
-    border: #E44A4A;
-    text-align: center;
-    outline: none;
-    cursor: pointer;
+.content_circle button {
+    width: 30px;
+    height: 30px;
+    margin-top: 16px;
     color: #E44A4A;
+    background-color: #FFF8DD;
+    border: 0;
+    outline: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Dovemayo_gothic';
 }
 
-.habit_detail_content_cherry1 {
+.cherryImg {
     float: left;
     width: 60px;
     height: 60px;
-    border: 4px solid transparent;
+    border: 3px solid #E44A4A;
+    background-color: #FFF8DD;
     border-radius: 50px;
-    background-image: url("./cherry1.png");
-    background-position: center;
-    background-repeat: no-repeat;
     margin-left: 12px;
     margin-top: 50px;
     text-align: center;
-    line-height: 60px; 
 }
 
-.habit_detail_content_cherry1 button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
+.cherryImg button {
+    width: 56px;
+    height: 49px;
+    margin-top: 6px;
     background-color: transparent;
-    border: #E44A4A;
-    text-align: center;
+    background-image: url("../img/cherry1.png");
+    border: 0;
     outline: none;
-    cursor: pointer;
-    color: #E44A4A;
 }
 
-.habit_detail_rate {
+
+/* ------------------------------ 성공 버튼 ------------------------------ */
+
+/* 전체 박스 */
+.success_container {
     z-index: 30;
     position: absolute;
-    width: 296px;
-    height: 400px;
-    color: #E44A4A;
-    font-size: 20px;
-    line-height: 30px;
-    text-align: center;
-    margin-top: 320px;
+    width: 300px;
+    height: 108px;
+    margin-top: 289px;
+    border-top: 3px solid #FFF8DD;
+    background-color: #E44A4A;
+    border-radius: 00px 0px 0px 55px;
+    color: #FFF8DD;
 }
 
-.habit_tracker_icon {
+/* 버튼 설명 */
+.explain {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+/* 체크 버튼 */
+.successBtn {
+    width: 40px;
+    height: 40px;
+    margin-left: 130px;
+    cursor: pointer;
+}
+
+/* ------------------------------ 수정, 수정 취소, 목록 버튼 ------------------------------ */
+
+/* 버튼 전체 박스 */
+.btnBox {
+    width: 220px;
+    margin-top: 510px;
+    margin-left: 1145px;
+}
+.home, .editBtn, .editCancelBtn {
     float: left;
     width: 100px;
-    height: 100px;
-    margin-left: 40px;
-    margin-top: 35px;
+    height: 40px;
+    background-color: #E44A4A;
+    border-radius: 10px;
+    border: 3px solid #FFF8DD;
+    outline: none;
+    color: #FFF8DD;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Dovemayo_gothic';
+    transition: 0.1s background ease-in;
+}
+.editBtn, .editCancelBtn {
+    margin-right: 20px;
+}
+.home:hover, .editBtn:hover, .editCancelBtn:hover {
+    border: 3px solid #E44A4A;
+    background-color: #FFF8DD;
+    color: #E44A4A;
+}
+
+/* ------------------------------ 제목 수정 중일때 ------------------------------ */
+
+
+/* 제목 전체 박스 */
+.content_title_edit_container {
+    float: left;
+    display: flex;
+    height: 290px;
+    width: 300px;
+    align-items: center;
+    border-radius: 50px 0px 0px 00px;
+    background-color: #E44A4A;
+}
+
+/* 입력 칸 아웃라인 */
+.title_edit_box {
+    width: 80%;
+    margin-left: 6%;
+    height: 15%;
+    border: 3px solid #FFF8DD;
+    padding: 10px;
+}
+
+/* 입력받는 곳 */
+.title_edit_box input {
+    width: 98%;
+    height: 95%;
+    border: 0;
+    color: #E44A4A;
+    background-color: rgb(255, 248, 221, 70%);
+    font-size: 25px;
+    text-align: center;
+    outline: none;
+    font-family: 'Dovemayo_gothic';
+}
+.title_edit_box input::placeholder {
+    color: #E44A4A;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Dovemayo_gothic';
+}
+
+/* ------------------------------ 수정 내용 저장 버튼 ------------------------------ */
+
+
+.savebtn_container {
+    z-index: 30;
+    position: absolute;
+    width: 300px;
+    height: 108px;
+    margin-top: 289px;
+    border-top: 3px solid #FFF8DD;
+    background-color: #E44A4A;
+    border-radius: 00px 0px 0px 55px;
+    cursor: pointer;
+}
+
+.savebtn {
+    margin-left: 30%;
+    margin-top: 13%;
+    width: 40%;
+    height: 20%;
+    border: 0;
+    outline: none;
+    border-radius: 10px;
+    background-color: #E44A4A;
+    font-size: 30px;
+    cursor: pointer;
+    color: #FFF8DD;
+    font-family: 'Dovemayo_gothic';
 }

@@ -1,35 +1,33 @@
-import React, { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import './habitchart.css';
 import axios from "axios";
 
-function Habitchart(props) {
-    const[average, setAverage] = useState('');
-    
+function HabitChart(props) {
+
+    const [average, setAverage] = useState('');
     useEffect(() => {
         const date = new Date(props.today);
         const year = date.getFullYear();
         const month = ("0" + (date.getMonth() + 1)).slice(-2);
-        const newDate = year + "" + month+"01";
+        const newDate = year + "" + month + "01";
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/chart/${newDate}`)
-        .then(response => {
-            console.log(response.data);
-            setAverage(response.data.average);
-        })
-        .catch(error => {
-            console.log(error);
-        });
+            .then(response => {
+                console.log(response.data);
+                setAverage(response.data.average);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }, [props]);
-    
+
     var average_list = [];
-    
-    for (const averages of average){
+    for (const averages of average) {
         average_list.push(averages.completionRate);
     }
-    
+
     const options = {
-        
+
         chart: {
             backgroundColor: "#E44A4A",
             type: 'line',
@@ -58,7 +56,7 @@ function Habitchart(props) {
                 'fontWeight': 'bold'
             }
         },
-        
+
         xAxis: {
             lineColor: '#FFF8DD',
             tickColor: '#FFF8DD',
@@ -113,7 +111,7 @@ function Habitchart(props) {
         },
 
         series: [{
-            name: '달성률',  
+            name: '달성률',
             data: average_list,
             zIndex: 1,
             color: '#FFF8DD',
@@ -133,16 +131,13 @@ function Habitchart(props) {
                 'fontWeight': 'bold'
             }
         }
-
     };
 
     return (
-
         <>
             <div className="container">
                 <div className="chart-wrap">
                     <div id='test-chart' style={{ height: '500px', width: '900px', paddingTop: '30px' }}>
-                        
                         <HighchartsReact highcharts={Highcharts} options={options} />
                     </div>
                 </div>
@@ -152,4 +147,4 @@ function Habitchart(props) {
 
     )
 };
-export default Habitchart;
+export default HabitChart;
