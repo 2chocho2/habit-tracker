@@ -14,7 +14,6 @@ const ProgressBar = ({ percent }) => {
   useEffect(() => {
     axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/detail/${habitIdx}`)
       .then(response => {
-        console.log(response);
         setProgressPercent(response.data.percent);
       })
       .catch(error => console.log(error));

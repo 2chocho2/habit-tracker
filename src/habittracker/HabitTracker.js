@@ -22,7 +22,6 @@ const HabitTracker = () => {
         setchangedMonth(date.getMonth() + 1);
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/date/${newDate}`)
             .then(response => {
-                console.log(response.data);
                 setDatas(response.data.list);
                 setDate(new Date(new moment(response.data.month, 'YYYY-MM')));
             })
@@ -43,7 +42,6 @@ const HabitTracker = () => {
         const registDate = new Date(today);
         let month = registDate.getMonth() + 1;
         let monthEn = new Date(today).toLocaleDateString('en', { month: "short" })
-        console.log(registDate)
         return <>{month} {monthEn}</>
     }
 
@@ -55,9 +53,8 @@ const HabitTracker = () => {
         const month = ("0" + (date.getMonth() + 1)).slice(-2);
         const newDate = year + "" + month;
         setchangedMonth(date.getMonth() + 1); // 지난 달 버튼 누르면 바뀌는 달만 바뀌게
-        axios.get(`http://localhost:8080/api/habit/date/${newDate}`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/date/${newDate}`)
             .then(res => {
-                console.log(res.data);
                 setDatas(res.data.list);
             })
             .catch(err => {
@@ -73,9 +70,8 @@ const HabitTracker = () => {
         const month = ("0" + (date.getMonth() + 1)).slice(-2);
         const newDate = year + "" + month;
         setchangedMonth(date.getMonth() + 1); // 지난 달 버튼 누르면 바뀌는 달만 바뀌게 
-        axios.get(`http://localhost:8080/api/habit/date/${newDate}`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/date/${newDate}`)
             .then(res => {
-                console.log(res.data);
                 setDatas(res.data.list);
             })
             .catch(err => {
@@ -86,12 +82,12 @@ const HabitTracker = () => {
     // 입력
     const [content, setContent] = useState('');
     const handlerAddContent = e => setContent(e.target.value);
+
     const handlerAddSubmit = e => {
         e.preventDefault();
 
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/add`, { habitContent: content })
             .then(response => {
-                console.log(response);
                 if (response.data === 1) {
                     window.location.reload();
                 } else {
@@ -125,7 +121,6 @@ const HabitTracker = () => {
                 const newDatas = datas.filter(d => d.habitIdx !== e);
                 setDatas(newDatas);
             } else if (result.isDenied) {
-
             }
         })
             .catch(error => {
@@ -144,9 +139,13 @@ const HabitTracker = () => {
             <h2 className="habit_tracker_title">MAKE A HABIT IN 30 DAYS!!</h2>
 
             {/* 월 */}
-            <img className="habit_tracker_before_month" src={before_month} onClick={handlerClickPrev} />
+            <img className="habit_tracker_before_month"
+                src={before_month}
+                onClick={handlerClickPrev} />
             <div className="habit_tracker_month">{month()}</div>
-            <img className="habit_tracker_next_month" src={next_month} onClick={handlerClickNext} />
+            <img className="habit_tracker_next_month"
+                src={next_month}
+                onClick={handlerClickNext} />
 
             {/* 차트 */}
             <div className="my_habit_chart">
@@ -159,32 +158,45 @@ const HabitTracker = () => {
                 <div className="habit_list_title">My Habit</div>
                 {datas && datas.map(habit =>
                     <div className="list_box">
+
                         {
-                            parseInt(defaultmonth) === parseInt(changedmonth) ?
-                                (<MdRemoveCircleOutline className="habit_list_remove" onClick={() => handlerClickDelete(habit.habitIdx)} />)
-                                : (<div><MdRemoveCircleOutline className="habit_list_remove"></MdRemoveCircleOutline></div>)
+                            parseInt(defaultmonth) === parseInt(changedmonth)
+                                ?
+                                (<MdRemoveCircleOutline className="habit_list_remove"
+                                                        onClick={() => handlerClickDelete(habit.habitIdx)} />)
+                                :
+                                (<div><MdRemoveCircleOutline className="habit_list_remove" /></div>)
                         }
-                        <Link className="habit_list_text" to={`/habitDetail/${habit.habitIdx}`}>
-                            {habit.habitContent} <TiArrowForwardOutline className='icon' />
+
+                        <Link className="habit_list_text"
+                            to={`/habitDetail/${habit.habitIdx}`}>
+                            {habit.habitContent}
+                            <TiArrowForwardOutline className='icon' />
                         </Link>
                     </div>
                 )}
 
                 {/* 입력칸 */}
-                {parseInt(defaultmonth) === parseInt(changedmonth) ?
+                {parseInt(defaultmonth) === parseInt(changedmonth)
+                    ?
                     (
                         <div className="habit_list_insert">
                             <form onSubmit={handlerAddSubmit}>
                                 <div className="insert_text">
-                                    <input type="text" placeholder="할일을 입력하세요" value={content} onChange={handlerAddContent} />
+                                    <input type="text"
+                                            placeholder="할일을 입력하세요"
+                                            value={content}
+                                            onChange={handlerAddContent} />
                                 </div>
+
                                 <div className="insert_btn">
                                     <button type="submit"><MdAdd /></button>
                                 </div>
                             </form>
                         </div>
                     )
-                    : (<div></div>)}
+                    :
+                    (<div></div>)}
             </div>
         </div>
     );

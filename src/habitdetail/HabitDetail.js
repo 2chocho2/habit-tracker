@@ -9,24 +9,18 @@ import swal from 'sweetalert2';
 import ProgressBar from "./ProgressBar";
 import "./HabitDetail.css";
 
-
 const HabitDetail = ({ history }, props) => {
 
     let [insert, setInsert] = useState(0);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/habit/detail/${habitIdx}`)
+        axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/detail/${habitIdx}`)
             .then(response => {
-                console.log(response);
                 setHabit(response.data.habitDto);
-                console.log(response.data.habitContent);
                 setDate(response.data.registDt);
-                console.log(response.data.habitHistoryList);
-                console.log(habithistory[0]);
                 sethabitHistory(response.data.habitHistoryList);
                 setCount(response.data.count);
                 setPercent(response.data.percent);
-
             })
             .catch(error => console.log(error));
     }, [insert]);
@@ -80,8 +74,7 @@ const HabitDetail = ({ history }, props) => {
     // 성공 버튼
     const handlerSuccess = () => {
         const todaydate = new Date();
-        console.log(new moment(todaydate, 'YYYY-MM-DD').format('YYYY-MM-DD'));
-
+        
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/check`,
             {
                 'habitIdx': habitIdx,
@@ -106,7 +99,6 @@ const HabitDetail = ({ history }, props) => {
                 return;
             })
     };
-
 
     // 수정
     const [content, setContent] = useState(props.content);
@@ -169,7 +161,10 @@ const HabitDetail = ({ history }, props) => {
                     <div className="habit_detail_content_container">
                         <div className="content_title_edit_container">
                             <div className="title_edit_box">
-                                <input placeholder="제목을 입력하세요" type="text" onChange={handlerChangeName} required />
+                                <input placeholder="제목을 입력하세요" 
+                                        type="text" 
+                                        onChange={handlerChangeName} 
+                                        required />
                             </div>
                         </div>
 
@@ -181,13 +176,16 @@ const HabitDetail = ({ history }, props) => {
 
                         {/* 저장 버튼 */}
                         <div className="savebtn_container">
-                            <button className="savebtn" onClick={() => handlerClickUpdate(contentId)}>저장</button>
+                            <button className="savebtn" 
+                                    onClick={() => handlerClickUpdate(contentId)}>저장</button>
                         </div>
                     </div>
 
                     <div className="btnBox">
-                        <button className="editCancelBtn" onClick={() => setIsEditing(false)}>수정 취소</button>
-                        <button className="home" onClick={handlerBack}>목록으로</button>
+                        <button className="editCancelBtn" 
+                                onClick={() => setIsEditing(false)}>수정 취소</button>
+                        <button className="home" 
+                                onClick={handlerBack}>목록으로</button>
                     </div>
                 </div>
 
@@ -229,13 +227,16 @@ const HabitDetail = ({ history }, props) => {
                         {/* 성공 버튼 */}
                         <div className="success_container">
                             <div className="explain">버튼으로 오늘 성공 여부 확인하기!</div>
-                            <MdOutlineCheckCircle className="successBtn" onClick={handlerSuccess} />
+                            <MdOutlineCheckCircle className="successBtn" 
+                                                onClick={handlerSuccess} />
                         </div>
                     </div>
 
                     <div className="btnBox">
-                        <button className="editBtn" onClick={() => setIsEditing(true)}>제목 수정</button>
-                        <button className="home" onClick={handlerBack}>목록으로</button>
+                        <button className="editBtn" 
+                                onClick={() => setIsEditing(true)}>제목 수정</button>
+                        <button className="home" 
+                                onClick={handlerBack}>목록으로</button>
                     </div>
                 </div>
             </div>

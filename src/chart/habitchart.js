@@ -14,7 +14,6 @@ function Habitchart(props) {
         const newDate = year + "" + month+"01";
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/chart/${newDate}`)
         .then(response => {
-            console.log(response.data);
             setAverage(response.data.average);
         })
         .catch(error => {
@@ -29,7 +28,6 @@ function Habitchart(props) {
     }
     
     const options = {
-        
         chart: {
             backgroundColor: "#E44A4A",
             type: 'line',
@@ -109,7 +107,6 @@ function Habitchart(props) {
                 pointStart: 1,
                 pointEnd: 30
             },
-
         },
 
         series: [{
@@ -133,7 +130,6 @@ function Habitchart(props) {
                 'fontWeight': 'bold'
             }
         }
-
     };
 
     return (
@@ -142,7 +138,6 @@ function Habitchart(props) {
             <div className="container">
                 <div className="chart-wrap">
                     <div id='test-chart' style={{ height: '500px', width: '900px', paddingTop: '30px' }}>
-                        
                         <HighchartsReact highcharts={Highcharts} options={options} />
                     </div>
                 </div>

@@ -55,7 +55,6 @@ function TodoList() {
             });
     };
 
-
     return (
         <>
             {todoList && todoList.map(todo => (
@@ -66,11 +65,18 @@ function TodoList() {
                             <div className='Todo-box'></div>
                             <div className="TodoListItem">
                                 <div className='checkBox'>
-                                    {todo.todoComplete == true ?
-                                        <FaCheckCircle className='checkBoxbutton' onClick={handlerUncheck(todo.todoId)} />
-                                        : <FaRegCircle className='checkBoxbutton' onClick={handlerCheck(todo.todoId)} />}
+
+                                    {todo.todoComplete == true
+                                        ?
+                                        <FaCheckCircle className='checkBoxbutton' 
+                                                        onClick={handlerUncheck(todo.todoId)} />
+                                        :
+                                        <FaRegCircle className='checkBoxbutton' 
+                                                    onClick={handlerCheck(todo.todoId)} />}
+                                                    
                                 </div>
-                                <TodoUpdate todoName={todo.todoName} todoId={todo.todoId}></TodoUpdate>
+                                <TodoUpdate todoName={todo.todoName} 
+                                            todoId={todo.todoId}></TodoUpdate>
                             </div>
                         </div>
                     </div>
