@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
-import chart from "../img/chart.png"
 import before_month from "../img/before_month.png"
 import next_month from "../img/next_month.png"
 import swal from 'sweetalert2';
@@ -82,29 +81,42 @@ const HabitTracker = () => {
     // 입력
     const [content, setContent] = useState('');
     const handlerAddContent = e => setContent(e.target.value);
-
     const handlerAddSubmit = e => {
         e.preventDefault();
-
-        axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/add`, { habitContent: content })
-            .then(response => {
-                if (response.data === 1) {
-                    window.location.reload();
-                } else {
-                    alert(response.data);
+        if (content != '') {
+            axios.post(`http://localhost:8080/api/habit/add`, { habitContent: content })
+                .then(response => {
+                    if (response.data === 1) {
+                        swal.fire({
+                            title: '루틴이 등록 되었습니다!🍒',
+                            showConfirmButton: false,
+                            timer: 10000
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    } else {
+                        alert(response.data);
+                        return;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert(`${error.response.data.message} (${error.message})`);
                     return;
-                }
+                });
+        } else {
+            swal.fire({
+                title: '루틴을 입력해주세요🍒',
+                showConfirmButton: false,
+                timer: 1000
             })
-            .catch(error => {
-                console.log(error);
-                return;
-            });
+        };
     };
 
     // 삭제
     const handlerClickDelete = (e) => {
         swal.fire({
-            title: '삭제 하시겠습니까?',
+            title: '삭제 하시겠습니까?🍒',
             showDenyButton: true,
             confirmButtonText: 'Yes',
             confirmButtonColor: '#E44A4A',
@@ -113,7 +125,7 @@ const HabitTracker = () => {
             if (result.isConfirmed) {
                 axios.delete(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/delete/${e}`)
                 swal.fire({
-                    title: '삭제되었습니다.',
+                    title: '삭제되었습니다🍎',
                     icon: 'success',
                     confirmButtonColor: '#E44A4A',
                     iconColor: '#E44A4A'
@@ -130,73 +142,63 @@ const HabitTracker = () => {
     }
 
     return (
-        <div className="habit_tracker_container">
+        <div id='habit-container'>
+            <div className="habit_tracker_container">
+                {/* 월 */}
+                <div className='habit-header'>
+                    <img className="habit_tracker_before_month"
+                        src={before_month}
+                        onClick={handlerClickPrev} />
+                    <div className="habit_tracker_month">{month()}</div>
+                    <img className="habit_tracker_next_month"
+                        src={next_month}
+                        onClick={handlerClickNext} />
+                </div>
 
-            {/* 타이틀 */}
-            <div className="habit_tracker_title_circle">
-                <img className="habit_tracker_title_circle_icon" src={chart}></img>
-            </div>
-            <h2 className="habit_tracker_title">MAKE A HABIT IN 30 DAYS!!</h2>
+                {/* 차트 */}
+                <div className="my_habit_chart">
+                    <div className="my_habit_chart_title">My Habit Chart</div>
+                    <HabitChart today={date} />
+                </div>
 
-            {/* 월 */}
-            <img className="habit_tracker_before_month"
-                src={before_month}
-                onClick={handlerClickPrev} />
-            <div className="habit_tracker_month">{month()}</div>
-            <img className="habit_tracker_next_month"
-                src={next_month}
-                onClick={handlerClickNext} />
+                {/* 리스트 */}
+                <div className="habit_list_container">
+                    <div className="habit_list_title">My Habit</div>
+                    <div className='my-list-container'>
+                        {datas && datas.map((habit, index) =>
+                            <div className="list_box" key={index}>
+                                {
+                                    parseInt(defaultmonth) === parseInt(changedmonth)
+                                        ?
+                                        (<MdRemoveCircleOutline className="habit_list_remove"
+                                            onClick={() => handlerClickDelete(habit.habitIdx)} />)
+                                        :
+                                        (<div><MdRemoveCircleOutline className="habit_list_remove" /></div>)
+                                }
 
-            {/* 차트 */}
-            <div className="my_habit_chart">
-                <div className="my_habit_chart_title">My Habit Chart</div>
-                <HabitChart today={date} />
-            </div>
+                                <Link className="habit_list_text" to={`/habitDetail/${habit.habitIdx}`}>
+                                    {habit.habitContent}
+                                </Link>
 
-            {/* 리스트 */}
-            <div className="habit_list_container">
-                <div className="habit_list_title">My Habit</div>
-                {datas && datas.map(habit =>
-                    <div className="list_box">
-
-                        {
-                            parseInt(defaultmonth) === parseInt(changedmonth)
-                                ?
-                                (<MdRemoveCircleOutline className="habit_list_remove"
-                                                        onClick={() => handlerClickDelete(habit.habitIdx)} />)
-                                :
-                                (<div><MdRemoveCircleOutline className="habit_list_remove" /></div>)
-                        }
-
-                        <Link className="habit_list_text"
-                            to={`/habitDetail/${habit.habitIdx}`}>
-                            {habit.habitContent}
-                            <TiArrowForwardOutline className='icon' />
-                        </Link>
+                                <Link to={`/habitDetail/${habit.habitIdx}`}>
+                                    <TiArrowForwardOutline className='habitDetail-icon' />
+                                </Link>
+                            </div>
+                        )}
                     </div>
-                )}
 
-                {/* 입력칸 */}
-                {parseInt(defaultmonth) === parseInt(changedmonth)
-                    ?
-                    (
-                        <div className="habit_list_insert">
+                    {/* 입력칸 */}
+                    {parseInt(defaultmonth) === parseInt(changedmonth) ?
+                        (<div className="habit_list_insert">
                             <form onSubmit={handlerAddSubmit}>
-                                <div className="insert_text">
-                                    <input type="text"
-                                            placeholder="할일을 입력하세요"
-                                            value={content}
-                                            onChange={handlerAddContent} />
-                                </div>
-
-                                <div className="insert_btn">
-                                    <button type="submit"><MdAdd /></button>
-                                </div>
+                                <input className="insert_text" type="text"
+                                    placeholder="할일을 입력하세요"
+                                    value={content}
+                                    onChange={handlerAddContent} />
+                                <button className="insert_btn" type="submit"><MdAdd className='insert-icon' /></button>
                             </form>
-                        </div>
-                    )
-                    :
-                    (<div></div>)}
+                        </div>) : (<div></div>)}
+                </div>
             </div>
         </div>
     );

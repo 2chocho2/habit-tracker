@@ -36,6 +36,7 @@
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.4.2",
     "styled-components": "^5.3.10",
+    "sweetalert2": "^11.7.5",
     "web-vitals": "^2.1.4",
     "webpack": "^5.79.0",
     "webpack-cli": "^5.0.1",

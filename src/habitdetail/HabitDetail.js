@@ -4,10 +4,11 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import moment from 'moment';
-import chart from "../img/chart.png"
+// import chart from "../img/chart.png"
 import swal from 'sweetalert2';
 import ProgressBar from "./ProgressBar";
 import "./HabitDetail.css";
+import { HiSave } from "react-icons/hi";
 
 const HabitDetail = ({ history }, props) => {
 
@@ -74,7 +75,7 @@ const HabitDetail = ({ history }, props) => {
     // 성공 버튼
     const handlerSuccess = () => {
         const todaydate = new Date();
-        
+
         axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/check`,
             {
                 'habitIdx': habitIdx,
@@ -82,10 +83,11 @@ const HabitDetail = ({ history }, props) => {
             })
             .then(res => {
                 if (res.data === 1) {
+                    setInsert(insert + 1);
                 } else {
                     swal.fire({
                         icon: 'error',
-                        title: '당일에만 성공 버튼을 누를 수 있어요!',
+                        title: '당일에만 성공 버튼을 누를 수 있어요!🍒',
                         showConfirmButton: '확인',
                         confirmButtonColor: '#E44A4A',
                         iconColor: '#E44A4A'
@@ -95,7 +97,6 @@ const HabitDetail = ({ history }, props) => {
             })
             .catch(err => {
                 console.log(err);
-                setInsert(insert + 1);
                 return;
             })
     };
@@ -113,7 +114,7 @@ const HabitDetail = ({ history }, props) => {
                 if (response.data === 1) {
                     swal.fire({
                         icon: 'success',
-                        title: '수정되었습니다',
+                        title: '수정되었습니다🍒',
                         showConfirmButton: '확인',
                         confirmButtonColor: '#E44A4A',
                         iconColor: '#E44A4A'
@@ -126,7 +127,7 @@ const HabitDetail = ({ history }, props) => {
                 } else {
                     swal.fire({
                         icon: 'error',
-                        title: '수정에 실패했습니다',
+                        title: '수정에 실패했습니다🍎',
                         showConfirmButton: '확인',
                         confirmButtonColor: '#E44A4A',
                         iconColor: '#E44A4A'
@@ -140,107 +141,97 @@ const HabitDetail = ({ history }, props) => {
     // 기본에서 수정 버튼 눌렀을 때 보이는 페이지
     if (isEditing) {
         return (
-            <div className="habit_tracker_container">
-                <div className="habit_tracker_title_circle">
-                    <img className="habit_tracker_title_circle_icon" src={chart}></img>
-                </div>
-                <h2 className="habit_tracker_title">MAKE A HABIT IN 30 DAYS!!</h2>
+            <div id='habit-container'>
+                <div className="habit_tracker_container">
+                    <h2 className="habit_tracker_title">MAKE A HABIT IN 30 DAYS!!</h2>
 
-                <div className="habit_detail_container">
+                    <div className="habit_detail_container">
+                        {/* 제목 */}
+                        <div className="habit_detail_title">
+                            <div className="todayMonth">{createMonth()}</div>
+                            <div className="success_date">달성일 :{count}일</div>
+                        </div>
 
-                    {/* 제목 */}
-                    <div className="habit_detail_title">
-                        <div className="todayMonth">{createMonth()}</div>
-                        <div className="success_date">달성일 :{count}일</div>
-                    </div>
+                        {/* 프로그레스 바 */}
+                        <div><ProgressBar percent={percent} /></div>
 
-                    {/* 프로그레스 바 */}
-                    <div><ProgressBar percent={percent} /></div>
+                        {/* 내용 */}
+                        <div className="habit_detail_content_container">
+                            <div className="content_title_edit_container">
+                                <div className='title_edit_container'>
+                                    <div className="title_edit_box">
+                                        <input placeholder="제목을 입력하세요"
+                                            type="text"
+                                            onChange={handlerChangeName}
+                                            required />
+                                    </div>
+                                </div>
 
-                    {/* 내용 */}
-                    <div className="habit_detail_content_container">
-                        <div className="content_title_edit_container">
-                            <div className="title_edit_box">
-                                <input placeholder="제목을 입력하세요" 
-                                        type="text" 
-                                        onChange={handlerChangeName} 
-                                        required />
+                                {/* 저장 버튼 */}
+                                <div className="savebtn_container">
+                                    <button className="savebtn"
+                                        onClick={() => handlerClickUpdate(contentId)}>저장<HiSave id='save-icon' /></button>
+                                </div>
                             </div>
-                        </div>
 
-                        {/* 제목이랑 내용 나누는 선 */}
-                        <div className="habit_detail_content_title_line"></div>
-
-                        {/* 날짜 원형 이미지 */}
-                        <div>{createCircle()}</div>
-
-                        {/* 저장 버튼 */}
-                        <div className="savebtn_container">
-                            <button className="savebtn" 
-                                    onClick={() => handlerClickUpdate(contentId)}>저장</button>
+                            {/* 날짜 원형 이미지 */}
+                            <div className='circle-container'>{createCircle()}</div>
                         </div>
                     </div>
-
                     <div className="btnBox">
-                        <button className="editCancelBtn" 
-                                onClick={() => setIsEditing(false)}>수정 취소</button>
-                        <button className="home" 
-                                onClick={handlerBack}>목록으로</button>
+                        <button className="editCancelBtn"
+                            onClick={() => setIsEditing(false)}>수정 취소</button>
+                        <button className="home"
+                            onClick={handlerBack}>목록으로</button>
                     </div>
                 </div>
-
             </div>
 
         )
     } else {
         // 기본으로 보여지는 페이지
         return (
-            <div className="habit_tracker_container">
-                <div className="habit_tracker_title_circle">
-                    <img className="habit_tracker_title_circle_icon" src={chart}></img>
-                </div>
-                <h2 className="habit_tracker_title">MAKE A HABIT IN 30 DAYS!!</h2>
+            <div id='habitdetail-container'>
+                <div className="habit_tracker_container">
+                    <h2 className="habit_tracker_title">MAKE A HABIT IN 30 DAYS!!</h2>
 
-                <div className="habit_detail_container">
-
-                    {/* 제목 */}
-                    <div className="habit_detail_title">
-                        <div className="todayMonth">{createMonth()}</div>
-                        <div className="success_date">달성일 :{count}일</div>
-                    </div>
-
-                    {/* 프로그레스 바 */}
-                    <div><ProgressBar percent={percent} /></div>
-
-                    {/* 내용 */}
-                    <div className="habit_detail_content_container">
-                        <div className="habit_detail_content_title">
-                            <p className="habit_content_title">{habit.habitContent}</p>
+                    <div className="habit_detail_container">
+                        {/* 제목 */}
+                        <div className="habit_detail_title">
+                            <div className="todayMonth">{createMonth()}</div>
+                            <div className="success_date">달성일 :{count}일</div>
                         </div>
 
-                        {/* 제목이랑 내용 나누는 선 */}
-                        <div className="habit_detail_content_title_line"></div>
+                        {/* 프로그레스 바 */}
+                        <div><ProgressBar percent={percent} /></div>
 
-                        {/* 날짜 원형 이미지 */}
-                        <div>{createCircle()}</div>
+                        {/* 내용 */}
+                        <div className="habit_detail_content_container">
+                            <div className="habit_detail_content_sidebox">
+                                <div className='habit_detail_content_title'>
+                                <p className="habit_content_title">{habit.habitContent}</p>
+                                </div>
+                                {/* 성공 버튼 */}
+                                <div className="success_container">
+                                    <div className="explain">버튼으로 오늘 성공 여부 확인하기!</div>
+                                    <MdOutlineCheckCircle className="successBtn"
+                                        onClick={handlerSuccess} />
+                                </div>
+                            </div>
 
-                        {/* 성공 버튼 */}
-                        <div className="success_container">
-                            <div className="explain">버튼으로 오늘 성공 여부 확인하기!</div>
-                            <MdOutlineCheckCircle className="successBtn" 
-                                                onClick={handlerSuccess} />
+                            {/* 날짜 원형 이미지 */}
+                            <div className='circle-container'>{createCircle()}</div>
                         </div>
                     </div>
 
                     <div className="btnBox">
-                        <button className="editBtn" 
-                                onClick={() => setIsEditing(true)}>제목 수정</button>
-                        <button className="home" 
-                                onClick={handlerBack}>목록으로</button>
+                        <button className="editBtn"
+                            onClick={() => setIsEditing(true)}>제목 수정</button>
+                        <button className="home"
+                            onClick={handlerBack}>목록으로</button>
                     </div>
                 </div>
             </div>
-
         )
     };
 }

@@ -13,7 +13,6 @@ function HabitChart(props) {
         const newDate = year + "" + month + "01";
         axios.get(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/chart/${newDate}`)
             .then(response => {
-                console.log(response.data);
                 setAverage(response.data.average);
             })
             .catch(error => {
@@ -31,7 +30,7 @@ function HabitChart(props) {
         chart: {
             backgroundColor: "#E44A4A",
             type: 'line',
-            height: "55%"
+            height: "48%"
         },
 
         credits: {
@@ -42,7 +41,7 @@ function HabitChart(props) {
             text: '',
             align: 'center',
             style: {
-                'fontFamily': 'Inter',
+                'fontFamily': 'Dovemayo_gothic',
                 'fontWeight': 'bold',
                 'color': '#FFF8DD'
             }
@@ -53,7 +52,9 @@ function HabitChart(props) {
             align: 'left',
             style: {
                 'color': '#FFF8DD',
-                'fontWeight': 'bold'
+                'fontFamily': 'NanumSquareNeo-Variable',
+                'fontWeight': 'bold',
+                'fontSize': '14px'
             }
         },
 
@@ -64,16 +65,16 @@ function HabitChart(props) {
             title: {
                 text: "DAY",
                 style: {
-                    'fontFamily': 'Inter',
+                    'color': '#FFF8DD',
+                    'fontFamily': 'NanumSquareNeo-Variable',
                     'fontWeight': 'bold',
                     'fontSize': '14px',
-                    'color': '#FFF8DD'
+                    'letterSpacing': '3px'
                 }
             },
             labels: {
                 style: {
-                    "fontFamily": "Inter",
-                    'fontWeight': 'bold',
+                    "fontFamily": "Dovemayo_gothic",
                     "fontSize": "14px",
                     'color': '#FFF8DD'
                 }
@@ -91,7 +92,9 @@ function HabitChart(props) {
             labels: {
                 style: {
                     'color': '#FFF8DD',
-                    'fontWeight': 'bold'
+
+                    'fontFamily': 'Dovemayo_gothic',
+                    'fontSize': '14px'
                 }
             }
         },
@@ -127,8 +130,8 @@ function HabitChart(props) {
             verticalAlign: 'top',
             itemStyle: {
                 'color': '#FFF8DD',
-                'fontFamily': 'Inter',
-                'fontWeight': 'bold'
+                'fontFamily': 'NanumSquareNeo-Variable',
+                'fontSize': '14px'
             }
         }
     };
@@ -137,12 +140,11 @@ function HabitChart(props) {
         <>
             <div className="container">
                 <div className="chart-wrap">
-                    <div id='test-chart' style={{ height: '500px', width: '900px', paddingTop: '30px' }}>
+                    <div id='test-chart' style={{ height: '500px', width: '1045px', paddingTop: '20px' }}>
                         <HighchartsReact highcharts={Highcharts} options={options} />
                     </div>
                 </div>
             </div>
-
         </>
 
     )

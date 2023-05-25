@@ -42,14 +42,13 @@ export default ProgressBar;
 
 const Container = styled.div`
   display: flex;
-  // align-items: center;
-  width: 900px;
+  width: 60%;
   height: 50px;
   border: 3px solid #E44A4A;
   border-radius: 30px;
   background-color: #FFF8DD;
-  margin-left: 235px;
-  margin-top: 40px;
+  margin: 40px auto;
+
 `;
 const Progress = styled.div`
   background-color: #fd9a9a;
@@ -59,11 +58,10 @@ const Progress = styled.div`
   border-radius: 30px;
 `;
 const Percent = styled.div`
-  // width: 20px;
   height: 100%;
   font-size: 20px;
   margin-left: -110px;
-  margin-top: 15px;
+  margin-top: 12px;
   color: #FFF8DD;
 `;
 
@@ -79,12 +77,12 @@ const Cherry2 = styled.div`
   height: 73px;
   background-image: url(${cherry22});
   margin-left: -60px;
-  margin-top: -10px;
+  margin-top: -11px;
 `
 const Cherry3 = styled.div`
   width: 70px;
   height: 70px;
   background-image: url(${cherry3});
   margin-left: -80px;
-  margin-top: -10px;
+  margin-top: -17px;
 `
