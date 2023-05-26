@@ -84,7 +84,7 @@ const HabitTracker = () => {
     const handlerAddSubmit = e => {
         e.preventDefault();
         if (content != '') {
-            axios.post(`http://localhost:8080/api/habit/add`, { habitContent: content })
+            axios.post(`http://${process.env.REACT_APP_IP}:${process.env.REACT_APP_PORT}/api/habit/add`, { habitContent: content })
                 .then(response => {
                     if (response.data === 1) {
                         swal.fire({
