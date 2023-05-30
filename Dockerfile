@@ -5,7 +5,7 @@ ARG     GIT_REPOSITORY_ADDRESS
 ARG     REST_API_SERVER_IP
 ARG     REST_API_SERVER_PORT
 RUN     git clone $GIT_REPOSITORY_ADDRESS
-RUN     mv habit-tracker/* ./
+RUN     mv ./habit-tracker/* ./
 RUN     echo REACT_APP_IP=$REST_API_SERVER_IP > .env
 RUN     echo REACT_APP_PORT=$REST_API_SERVER_PORT >> .env
 RUN     npm install -s
